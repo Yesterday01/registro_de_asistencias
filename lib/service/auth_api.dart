@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class BaseAPI {
-  //static String base = "http://10.0.2.2:8000";
+  // static String base = "http://10.0.2.2:8000";
   //static String base = "http://200.1.2.110:80";
-  //static String base = "http://127.0.0.1:80";
-  static String base = "https://rh.unillantas.com.mx";
+  // static String base = "http://127.0.0.1:80";
+  static String base = "http://192.168.10.135:80";
+  // static String base = "https://rh.unillantas.com.mx";
   static var api = "$base/api";
   var usersMobilePath = "$api/mobileusers";
   var loginPath = "$api/loginmobileuser";

@@ -12,6 +12,8 @@ import 'package:registro_de_asistencias/service/auth_api.dart';
 import 'package:registro_de_asistencias/service/save_data.dart';
 import 'package:registro_de_asistencias/service/take_photo.dart';
 import 'package:registro_de_asistencias/tools/arrow_icons.dart';
+import 'package:registro_de_asistencias/widgets/button.dart';
+import 'package:registro_de_asistencias/widgets/input_text_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class FaceRegistrerScreenPage extends StatefulWidget {
@@ -396,7 +398,7 @@ class _FaceRegistrerScreenPageState extends State<FaceRegistrerScreenPage> {
               Container(
                   margin:
                       EdgeInsets.fromLTRB(0, 0, 0, mediaSize.height * 0.05)),
-              _inputTextField(),
+              InputTextField(controller: _textFieldController, dT: dT,mediaSize: mediaSize,hintText: "ID del colaborador",),
               _emptyId.isNotEmpty
                   ? Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 35.0),
@@ -407,13 +409,13 @@ class _FaceRegistrerScreenPageState extends State<FaceRegistrerScreenPage> {
               Container(
                   margin:
                       EdgeInsets.fromLTRB(0, mediaSize.height * 0.05, 0, 0)),
-              _buttonRegistrer('Registrar', () => _validarCampos(_recognition)),
+              Button(text: 'Registrar',onPressed: () => _validarCampos(_recognition), mediaSize: mediaSize),
             ],
           ),
         ),
       );
 
-  Widget _buttonRegistrer(String txt, onPress) => Container(
+  /* Widget _buttonRegistrer(String txt, onPress) => Container(
         margin: const EdgeInsets.symmetric(horizontal: 35),
         width: mediaSize.width * 0.7,
         height: mediaSize.height * 0.07,
@@ -436,7 +438,7 @@ class _FaceRegistrerScreenPageState extends State<FaceRegistrerScreenPage> {
               txt,
               style: const TextStyle(fontSize: 25),
             )),
-      );
+      ); */
 
   Widget _imageButton() => Material(
         child: InkWell(
@@ -481,7 +483,7 @@ class _FaceRegistrerScreenPageState extends State<FaceRegistrerScreenPage> {
         ),
       );
 
-  Widget _inputTextField() => Container(
+  /* Widget _inputTextField() => Container(
         height: MediaQuery.of(context).size.height * 0.07,
         decoration: BoxDecoration(
             border: Border.all(
@@ -500,7 +502,7 @@ class _FaceRegistrerScreenPageState extends State<FaceRegistrerScreenPage> {
               hintStyle: TextStyle(color: Color.fromRGBO(32, 53, 140, 0.5))),
           controller: _textFieldController,
         ),
-      );
+      ); */
 }
 
 class FacePainter extends CustomPainter {

@@ -6,6 +6,7 @@ import 'package:registro_de_asistencias/models/mobile_user.dart';
 import 'package:registro_de_asistencias/service/auth_api.dart';
 import 'package:registro_de_asistencias/view/edit_users_screen_page.dart';
 import 'package:registro_de_asistencias/view/mobile_users_screen_page.dart';
+import 'package:registro_de_asistencias/widgets/button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SuperAdminScreenPage extends StatefulWidget {
@@ -150,14 +151,18 @@ class _SuperAdminScreenPageState extends State<SuperAdminScreenPage> {
           children: [
             Container(
                 margin: const EdgeInsets.fromLTRB(0, 30, 0, 20),
-                child: _buttonUpsert('Registrar usuario', () {
-                  Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const MobileUsersRegistrerScreenPage()))
-                      .then((value) => _loadUserMobile());
-                })),
+                child: Button(text: 'Registrar usuario',onPressed: () {
+                      Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const MobileUsersRegistrerScreenPage()))
+                          .then((value) => _loadUserMobile());
+                    },
+                    mediaSize: mediaSize,
+                    backgroundColor: Colors.white,
+                    textColor: const Color.fromRGBO(32, 53, 140, 1.0)
+                )),
             Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                 child: _inputTextField(_searchController))
@@ -165,7 +170,7 @@ class _SuperAdminScreenPageState extends State<SuperAdminScreenPage> {
         ),
       );
 
-  Widget _buttonUpsert(String txt, onPress) => Container(
+  /* Widget _buttonUpsert(String txt, onPress) => Container(
         margin: const EdgeInsets.symmetric(horizontal: 30),
         width: mediaSize.width - 50,
         height: mediaSize.height * 0.06,
@@ -188,7 +193,7 @@ class _SuperAdminScreenPageState extends State<SuperAdminScreenPage> {
               minFontSize: 18,
               maxFontSize: 70,
             )),
-      );
+      ); */
 
   Widget _inputTextField(TextEditingController controller) => Container(
         height: mediaSize.height * 0.06,

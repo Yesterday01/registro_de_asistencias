@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:registro_de_asistencias/models/collaborator.dart';
 import 'package:registro_de_asistencias/service/auth_api.dart';
 import 'package:registro_de_asistencias/tools/arrow_icons.dart';
+import 'package:registro_de_asistencias/widgets/button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class MobileUsersRegistrerScreenPage extends StatefulWidget {
@@ -269,7 +270,7 @@ class _MobileUsersRegistrerScreenPageState
     );
   }
 
-  Widget _buttonRegistrer(String txt, onPress) => Container(
+  /* Widget _buttonRegistrer(String txt, onPress) => Container(
         margin: const EdgeInsets.symmetric(horizontal: 35),
         width: mediaSize.width - 60,
         height: mediaSize.height * 0.05,
@@ -292,7 +293,7 @@ class _MobileUsersRegistrerScreenPageState
               txt,
               style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700),
             )),
-      );
+      ); */
 
   Widget _inputTextField(String hintText, TextEditingController controller,
           TextInputType textInputType,
@@ -502,7 +503,7 @@ class _MobileUsersRegistrerScreenPageState
               Container(
                   margin:
                       EdgeInsets.fromLTRB(0, 0, 0, mediaSize.height * 0.08)),
-              _buttonRegistrer('Registrar', () {
+              Button( text: 'Registrar', onPressed: () {
                 setState(() {
                   if (_usernameFieldController.text.isEmpty) {
                     _emptyUserName = '"Favor de ingresar un nombre de usuario"';
@@ -564,7 +565,8 @@ class _MobileUsersRegistrerScreenPageState
                     }
                   }
                 });
-              }),
+              },
+              mediaSize: mediaSize),
               SizedBox(height: mediaSize.height * 0.05),
               Image.asset(
                 'assets/logo.png',

@@ -8,6 +8,8 @@ import 'package:registro_de_asistencias/service/network_connection.dart';
 import 'package:registro_de_asistencias/view/admin_screen_page.dart';
 import 'package:registro_de_asistencias/view/face_detector_screen_page.dart';
 import 'package:registro_de_asistencias/view/super_admin_screen_page.dart';
+import 'package:registro_de_asistencias/widgets/button.dart';
+import 'package:registro_de_asistencias/widgets/input_text_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -86,6 +88,7 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
           return const Center(child: CircularProgressIndicator());
         },
         barrierDismissible: false);
+    try{
     final response = await _authAPI.login(userName, password);
 
     Navigator.of(context).pop();
@@ -142,6 +145,17 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
             break;
         }
       }
+    }
+    } catch (error) {
+      Navigator.of(context).pop();
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          margin: const EdgeInsets.all(15.0),
+          behavior: SnackBarBehavior.floating,
+          duration: const Duration(milliseconds: 3000),
+          content: Text(
+            'An unexpected error occurred: $error',
+            style: TextStyle(fontSize: 16.sp),
+          )));
     }
   }
 
@@ -206,12 +220,12 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
             SizedBox(
               width: mediaSize.width * 0.6,
               child: AutoSizeText(
-                '¡Bienvenido!',
+                '¡Bienvenid@!',
                 style: TextStyle(
                     fontSize: dT == ScreenType.mobile ? 45 : 90,
                     fontWeight: FontWeight.bold,
                     color: const Color.fromRGBO(32, 53, 140, 1.0)),
-                minFontSize: 40,
+                minFontSize: 30,
                 maxLines: 1,
               ),
             )
@@ -233,7 +247,7 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _whiteText('Ingrese su usuario:'),
-                _inputTextField(_userController),
+                InputTextField(controller: _userController, dT:dT , mediaSize: mediaSize, hintText: 'Usuario', prefixIcon: Icons.account_circle,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 35.0),
                   child: Text(_validatorUser,
@@ -243,7 +257,7 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                 ),
                 const SizedBox(height: 30),
                 _whiteText('Contraseña:'),
-                _inputTextField(_passwordController, isPassword: true),
+                InputTextField(controller: _passwordController, isPassword: true, dT: dT, mediaSize: mediaSize ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 35.0),
                   child: Text(_validatorPass,
@@ -252,24 +266,28 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
                           fontSize: 16.sp)),
                 ),
                 const SizedBox(height: 40),
-                _buttonRegistrer('Ingresar', () {
-                  setState(() {
-                    if (_userName == null || _userController.text.isEmpty) {
-                      _validatorUser = '"Favor de ingresar tu usuario"';
-                    } else {
-                      _validatorUser = '';
-                    }
-                    if (_password == null || _passwordController.text.isEmpty) {
-                      _validatorPass = '"Favor de ingresar tu contraseña"';
-                    } else {
-                      _validatorPass = '';
-                    }
-                    if (_userController.text.isNotEmpty &&
-                        _passwordController.text.isNotEmpty) {
-                      authLogin(_userName!, _password!, context);
-                    }
-                  });
-                }),
+                Button(text: 'Ingresar', onPressed: () {
+                    setState(() {
+                      if (_userName == null || _userController.text.isEmpty) {
+                        _validatorUser = '"Favor de ingresar tu usuario"';
+                      } else {
+                        _validatorUser = '';
+                      }
+                      if (_password == null || _passwordController.text.isEmpty) {
+                        _validatorPass = '"Favor de ingresar tu contraseña"';
+                      } else {
+                        _validatorPass = '';
+                      }
+                      if (_userController.text.isNotEmpty &&
+                          _passwordController.text.isNotEmpty) {
+                        authLogin(_userName!, _password!, context);
+                      }
+                    });
+                  }, 
+                mediaSize: mediaSize,
+                backgroundColor: Colors.white,
+                textColor: const Color.fromRGBO(32, 53, 140, 1.0),
+                ),
                 const SizedBox(height: 50),
               ],
             ),
@@ -288,7 +306,7 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
         ),
       );
 
-  Widget _inputTextField(TextEditingController controller,
+  /* Widget _inputTextField(TextEditingController controller,
       {isPassword = false}) {
     return Container(
       height: mediaSize.height * 0.07,
@@ -357,5 +375,5 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
               txt,
               style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
             )),
-      );
+      ); */
 }

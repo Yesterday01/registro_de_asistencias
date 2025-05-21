@@ -8,6 +8,7 @@ import 'package:registro_de_asistencias/models/collaborator.dart';
 import 'package:registro_de_asistencias/models/user.dart';
 import 'package:registro_de_asistencias/service/auth_api.dart';
 import 'package:registro_de_asistencias/view/face_registrer_screen_page.dart';
+import 'package:registro_de_asistencias/widgets/button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class AdminScreenPage extends StatefulWidget {
@@ -167,7 +168,7 @@ class _AdminScreenPageState extends State<AdminScreenPage> {
           children: [
             Container(
                 margin: const EdgeInsets.fromLTRB(0, 30, 0, 20),
-                child: _buttonUpsert('Registrar/Actualizar', () async {
+                child: Button(text: 'Registrar/Actualizar', onPressed: () async {
                   Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -176,7 +177,11 @@ class _AdminScreenPageState extends State<AdminScreenPage> {
                       .then((value) => setState(() {
                             _initializeDao();
                           }));
-                })),
+                }, mediaSize: mediaSize, 
+                backgroundColor: Colors.white, 
+                textColor: const Color.fromRGBO(32, 53, 140, 1.0)
+                )
+            ),
             Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                 child: _inputTextField(_searchController))
@@ -185,7 +190,7 @@ class _AdminScreenPageState extends State<AdminScreenPage> {
       );
 
   // Diseño de botón principal
-  Widget _buttonUpsert(String txt, onPress) => Container(
+  /* Widget _buttonUpsert(String txt, onPress) => Container(
         margin: const EdgeInsets.symmetric(horizontal: 30),
         width: mediaSize.width - 50,
         height: mediaSize.height * 0.06,
@@ -208,7 +213,7 @@ class _AdminScreenPageState extends State<AdminScreenPage> {
               minFontSize: 18,
               maxFontSize: 70,
             )),
-      );
+      ); */
 
   // Diseño del campo para ingresar datos
   Widget _inputTextField(TextEditingController controller) => Container(
